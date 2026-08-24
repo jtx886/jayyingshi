@@ -1,0 +1,20 @@
+# Apache 伪静态（可选）+ 安全保护
+Options -Indexes
+
+# 禁止访问includes和uploads目录下的php执行
+<FilesMatch "\.(php|phar|phtml)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# 禁止直接访问配置文件
+<Files "config.php">
+    Require all denied
+</Files>
+<FilesMatch "\.(sql|lock)$">
+    Require all denied
+</FilesMatch>

@@ -1,0 +1,11 @@
+# 禁止列出目录
+Options -Indexes
+# 禁止在uploads目录执行任何脚本
+<FilesMatch "\.(php|phar|phtml|pl|py|jsp|asp|sh|cgi)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Deny from all
+    </IfModule>
+</FilesMatch>
